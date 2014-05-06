@@ -1,4 +1,10 @@
-dashboard-starter-kit
+Dashboard Starter Kit
 =====================
 
-A simple dashboard interface
+A simple starter kit for building dashboards with Keen IO
+
+Install dependencies
+
+```
+bower install
+```
