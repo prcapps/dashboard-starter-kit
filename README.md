@@ -3,9 +3,10 @@ Dashboard Starter Kit
 
 A simple starter kit for building dashboards with Keen IO
 
-Install dependencies
+Install dependencies with [Bower](http://bower.io/)
 
 ```
+npm install -g bower
 bower install
 ```
 
