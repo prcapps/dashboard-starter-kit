@@ -9,11 +9,12 @@ Keen.ready(function(){
   // ----------------------------------------
   // Pageviews Area Chart
   // ----------------------------------------
-  var pageviews_timeline = new Keen.Query("count", {
-    eventCollection: "freshdesk_tickets",
+  var pageviews_timeline = new Keen.Query("sum", {
+    eventCollection: "harvest_events",
     interval: "hourly",
-    groupBy: "freshdesk_webhook.ticket_agent_name",
-    timeframe: "this_week",
+    targetProperty: "hours",
+    groupBy: ["project"],
+    timeframe: "today",
   });
 
   client.draw(pageviews_timeline, document.getElementById("chart-01"), {
@@ -63,11 +64,11 @@ Keen.ready(function(){
   // ----------------------------------------
   // Pageviews Pie Chart
   // ----------------------------------------
-  var pageviews_static = new Keen.Query("count", {
+  var pageviews_static = new Keen.Query("sum", {
    eventCollection: "harvest_events",
     timeframe: "today",
-    targetProperty: "id",
-    groupBy: "user_id"
+    targetProperty: "hours",
+    groupBy: "task"
   });
   client.draw(pageviews_static, document.getElementById("chart-02"), {
     chartType: "piechart",
@@ -200,6 +201,31 @@ Keen.ready(function(){
   //     isStacked: true
   //   }
   // });
+
+  var pageviews_timeline2 = new Keen.Query("count", {
+    eventCollection: "fetchapp_tickets",
+    interval: "hourly",
+    targetProperty: "id",
+    groupBy: ["freshdesk_webhook.ticket_status"],
+    timeframe: "today",
+  });
+
+
+  client.draw(pageviews_timeline2, document.getElementById("chart-05"), {
+    chartType: "columnchart",
+    title: false,
+    height: 250,
+    width: "auto",
+    chartOptions: {
+      chartArea: {
+        height: "85%",
+        left: "5%",
+        top: "5%",
+        width: "80%"
+      },
+      isStacked: true
+    }
+  });
 
 
 });
